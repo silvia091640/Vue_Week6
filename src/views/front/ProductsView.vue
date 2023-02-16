@@ -27,11 +27,7 @@
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm">
-                    <button type="button" class="btn btn-outline-secondary"
-                    @click="openModal(item)">
-                      <i class="fas fa-spinner fa-pulse"></i>
-                      查看更多
-                    </button>
+                    <RouterLink :to="`/product/${item.id}`" class="btn btn-outline-secondary">查看產品</RouterLink>
                     <button type="button" class="btn btn-outline-danger"
                     @click="addCart(item.id)">
                       <i class="fas fa-spinner fa-pulse"></i>
@@ -47,7 +43,7 @@
 </template>
 
 <script>
-// import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 
 export default {
@@ -61,6 +57,9 @@ export default {
       },
       isLoading: false
     }
+  },
+  components: {
+    RouterLink
   },
   methods: {
     getAllProducts () {

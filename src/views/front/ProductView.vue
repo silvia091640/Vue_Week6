@@ -1,5 +1,7 @@
 <template>
     這是單一產品頁面
+    <h1>{{ product.title }}</h1>
+    <img :src="product.imageUrl" width="200" class="img-fluid" alt="">
 </template>
 
 <script>
@@ -8,7 +10,7 @@ const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data () {
     return {
-      prodcut: {}
+      product: {}
     }
   },
   methods: {
@@ -16,7 +18,7 @@ export default {
       const { id } = this.$route.params
       this.$http.get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/product/${id}`)
         .then((res) => {
-          console.log(res)
+          this.product = res.data.product
         })
     }
 

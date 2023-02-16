@@ -3,9 +3,6 @@
     <div class="container">
         <div class="mt-4">
           <!-- 購物車列表 -->
-          <div class="text-end">
-            <button class="btn btn-outline-danger" type="button" @click="removeAllCarts">清空購物車</button>
-          </div>
           <table class="table align-middle">
             <thead>
               <tr>
@@ -82,6 +79,16 @@ export default {
       this.cartData.product_id = item.id
       this.cartData.qty = item.qty
       this.$http.put(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${item.id}`, { data: this.cartData })
+        .then((res) => {
+          this.getCarts()
+          alert(res.data.message)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    removeCartItem (cartId) {
+      this.$http.delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${cartId}`)
         .then((res) => {
           this.getCarts()
           alert(res.data.message)
